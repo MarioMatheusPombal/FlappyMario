@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://duivh3wax4syr"]
+
+[ext_resource type="Script" uid="uid://ck3hgulwx2rli" path="res://script/defeat.gd" id="1_rkk21"]
+[ext_resource type="Texture2D" uid="uid://cgeafsj4y6wi1" path="res://sprites/restart.png" id="2_ortuk"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ije3m"]
+texture = ExtResource("2_ortuk")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_043hq"]
+texture = ExtResource("2_ortuk")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wtg6v"]
+texture = ExtResource("2_ortuk")
+
+[node name="Defeat" type="CanvasLayer"]
+script = ExtResource("1_rkk21")
+
+[node name="RestartButton" type="Button" parent="."]
+offset_left = 342.0
+offset_top = 350.0
+offset_right = 502.0
+offset_bottom = 413.0
+theme_override_styles/hover = SubResource("StyleBoxTexture_ije3m")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_043hq")
+theme_override_styles/normal = SubResource("StyleBoxTexture_wtg6v")
+
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]

@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://4wjmr3m2edpe"]
+
+[ext_resource type="Script" uid="uid://x6ams5tr3va5" path="res://script/main.gd" id="1_h2yge"]
+[ext_resource type="Texture2D" uid="uid://dkiqearb2ox3b" path="res://sprites/bg.png" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://ck6gqbhotekst" path="res://scenes/mario.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://cbhgn0m7hspi6" path="res://scenes/pipe.tscn" id="2_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://b2yxp6khshe0d" path="res://scenes/ground.tscn" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://duivh3wax4syr" path="res://scenes/Defeat.tscn" id="6_tefeu"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_h2yge")
+pipe_scene = ExtResource("2_tbgi4")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(0, 386)
+texture = ExtResource("1_ig7tw")
+offset = Vector2(432, 0)
+
+[node name="Mario" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(318, 353)
+
+[node name="Ground" parent="." instance=ExtResource("4_jyhfs")]
+z_index = 1
+
+[node name="PipeTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="ScoreLabel" type="Label" parent="."]
+z_index = 1
+offset_left = 335.0
+offset_top = 31.0
+offset_right = 543.0
+offset_bottom = 86.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "PONTOS: 0"
+
+[node name="Defeat" parent="." instance=ExtResource("6_tefeu")]
+
+[connection signal="hit" from="Ground" to="." method="_on_ground_hit"]
+[connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]
+[connection signal="restart" from="Defeat" to="." method="_on_defeat_restart"]
